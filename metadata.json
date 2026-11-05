@@ -1,0 +1,6 @@
+{
+  "name": "PetMargin - Control de Precios y Rentabilidad",
+  "description": "App móvil intuitiva para control de precios, comisiones y ranking de márgenes de ganancia por proveedor para alimentos de mascotas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
