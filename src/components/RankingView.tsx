@@ -6,7 +6,7 @@ import { Trophy, ArrowDownUp, AlertTriangle, Flame, Calculator } from 'lucide-re
 interface RankingViewProps {
   products: ProductItem[];
   suppliers: Supplier[];
-  onSimulate: (product: ProductItem) => void;
+  onSimulate: (product: ProductItem, useSuggested?: boolean) => void;
 }
 
 export const RankingView: React.FC<RankingViewProps> = ({
@@ -381,13 +381,24 @@ export const RankingView: React.FC<RankingViewProps> = ({
                   >
                     {formatCurrency(profit)}
                   </span>
-                  <button
-                    onClick={() => onSimulate(product)}
-                    className="mt-0.5 text-[10px] font-semibold text-amber-700 hover:text-amber-800 flex items-center gap-0.5 justify-end"
-                  >
-                    <Calculator className="w-3 h-3" />
-                    Simular
-                  </button>
+                  <div className="flex flex-col items-end gap-1 mt-1">
+                    {product.sugerido > product.ventaMeli && (
+                      <button
+                        onClick={() => onSimulate(product, true)}
+                        className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 hover:bg-amber-200 text-amber-900 flex items-center gap-0.5 transition"
+                        title="Calcular con precio sugerido oficial"
+                      >
+                        ⚡ Con sugerido
+                      </button>
+                    )}
+                    <button
+                      onClick={() => onSimulate(product, false)}
+                      className="text-[10px] font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-0.5 justify-end"
+                    >
+                      <Calculator className="w-3 h-3 text-slate-500" />
+                      Simular
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

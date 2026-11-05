@@ -53,6 +53,7 @@ export default function App() {
   // Modals
   const [simulatorOpen, setSimulatorOpen] = useState(false);
   const [simulationProduct, setSimulationProduct] = useState<ProductItem | null>(null);
+  const [simulatorUseSugerido, setSimulatorUseSugerido] = useState(false);
   const [newProductOpen, setNewProductOpen] = useState(false);
 
   // Supplier Counts calculation
@@ -82,8 +83,9 @@ export default function App() {
   }, [products]);
 
   // Handlers
-  const handleOpenSimulator = (product?: ProductItem) => {
+  const handleOpenSimulator = (product?: ProductItem, useSuggested = false) => {
     setSimulationProduct(product || products[0]);
+    setSimulatorUseSugerido(useSuggested);
     setSimulatorOpen(true);
   };
 
@@ -128,10 +130,6 @@ export default function App() {
               selectedSupplier={selectedSupplier}
               onSelectSupplier={setSelectedSupplier}
               supplierCounts={supplierCounts}
-              selectedPetType={selectedPetType}
-              onSelectPetType={setSelectedPetType}
-              selectedProfitFilter={selectedProfitFilter}
-              onSelectProfitFilter={setSelectedProfitFilter}
             />
 
             {/* Catalog Products List */}
@@ -225,9 +223,33 @@ export default function App() {
                   </option>
                 ))}
               </select>
+              {/* Propuesta si el producto seleccionado está por debajo del sugerido */}
+              {simulationProduct && simulationProduct.sugerido > simulationProduct.ventaMeli && (
+                <div className="mt-3 p-3 rounded-xl bg-amber-50 border border-amber-300 space-y-1.5">
+                  <div className="flex items-center justify-between text-xs font-bold text-amber-900">
+                    <span className="flex items-center gap-1">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                      Precio por debajo del sugerido
+                    </span>
+                    <span className="text-[11px] text-amber-800">
+                      Sugerido: ${simulationProduct.sugerido.toLocaleString('es-AR')}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-amber-800">
+                    Actualmente se vende a ${simulationProduct.ventaMeli.toLocaleString('es-AR')}. Puedes calcular directamente con el sugerido oficial del proveedor.
+                  </p>
+                  <button
+                    onClick={() => handleOpenSimulator(simulationProduct, true)}
+                    className="w-full py-1.5 px-3 rounded-lg bg-amber-600 hover:bg-amber-700 active:scale-95 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition"
+                  >
+                    <span>Calcular con precio sugerido (${simulationProduct.sugerido.toLocaleString('es-AR')})</span>
+                  </button>
+                </div>
+              )}
+
               <div className="mt-3">
                 <button
-                  onClick={() => setSimulatorOpen(true)}
+                  onClick={() => handleOpenSimulator(simulationProduct || products[0], false)}
                   className="w-full py-2 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition active:scale-95"
                 >
                   Abrir Calculadora Interactiva en Vivo
@@ -271,6 +293,7 @@ export default function App() {
       <QuickSimulatorModal
         isOpen={simulatorOpen}
         product={simulationProduct}
+        initialUseSugerido={simulatorUseSugerido}
         onClose={() => setSimulatorOpen(false)}
         onSaveProductPrice={handleSaveProductPrice}
       />

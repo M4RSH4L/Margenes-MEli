@@ -25,20 +25,12 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-4xl mx-auto px-4 py-2.5">
         {/* Top bar with branding and actions */}
         <div className="flex items-center justify-between gap-2.5">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-600 border border-amber-500/20 flex items-center justify-center font-black text-base shadow-xs">
-              🐾
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <h1 className="text-base font-extrabold tracking-tight text-slate-900 leading-none">PetMargin</h1>
-                <span className="text-[10px] font-semibold tracking-wide bg-slate-100 text-slate-600 border border-slate-200 px-1.5 py-0.2 rounded-md">
-                  Precios & Margen
-                </span>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-600 border border-amber-500/20 flex items-center justify-center font-black text-base shadow-xs">
+                🐾
               </div>
-              <p className="text-[11px] text-slate-500 leading-tight">Control de rentabilidad en Mercado Libre</p>
+              <h1 className="text-base font-extrabold tracking-tight text-slate-900">PetMargin</h1>
             </div>
-          </div>
 
           <div className="flex items-center gap-1.5">
             <button

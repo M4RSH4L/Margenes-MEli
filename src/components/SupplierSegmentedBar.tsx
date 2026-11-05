@@ -6,10 +6,6 @@ interface SupplierSegmentedBarProps {
   selectedSupplier: Supplier | 'Todos';
   onSelectSupplier: (supplier: Supplier | 'Todos') => void;
   supplierCounts: Record<string, number>;
-  selectedPetType: 'todos' | 'perro' | 'gato';
-  onSelectPetType: (type: 'todos' | 'perro' | 'gato') => void;
-  selectedProfitFilter: 'todos' | 'rentable' | 'baja' | 'perdida';
-  onSelectProfitFilter: (filter: 'todos' | 'rentable' | 'baja' | 'perdida') => void;
 }
 
 export const SupplierSegmentedBar: React.FC<SupplierSegmentedBarProps> = ({
@@ -17,14 +13,10 @@ export const SupplierSegmentedBar: React.FC<SupplierSegmentedBarProps> = ({
   selectedSupplier,
   onSelectSupplier,
   supplierCounts,
-  selectedPetType,
-  onSelectPetType,
-  selectedProfitFilter,
-  onSelectProfitFilter,
 }) => {
   return (
-    <div className="bg-white border-b border-slate-200/90 py-2 px-4 sticky top-[113px] z-20 shadow-xs">
-      <div className="max-w-4xl mx-auto space-y-2">
+    <div className="bg-white border-b border-slate-200/90 py-2 px-4 sticky top-[95px] z-20 shadow-xs">
+      <div className="max-w-4xl mx-auto space-y-1.5">
         {/* Header label */}
         <div className="flex items-center justify-between">
           <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400">
@@ -35,7 +27,7 @@ export const SupplierSegmentedBar: React.FC<SupplierSegmentedBarProps> = ({
           </span>
         </div>
 
-        {/* Clean, wrapped supplier pills without any horizontal scrollbars */}
+        {/* Clean wrapped supplier pills */}
         <div className="flex flex-wrap items-center gap-1.5">
           <button
             onClick={() => onSelectSupplier('Todos')}
@@ -79,79 +71,6 @@ export const SupplierSegmentedBar: React.FC<SupplierSegmentedBarProps> = ({
               </button>
             );
           })}
-        </div>
-
-        {/* Minimal secondary filters (no scrollbars, flex-wrap) */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-1.5 border-t border-slate-100 text-xs">
-          {/* Pet Type filters */}
-          <div className="flex items-center gap-1">
-            <span className="text-[10px] font-semibold text-slate-400 mr-1">Mascota:</span>
-            <button
-              onClick={() => onSelectPetType('todos')}
-              className={`px-2 py-0.5 rounded-md text-[11px] transition ${
-                selectedPetType === 'todos'
-                  ? 'bg-slate-200/90 text-slate-900 font-bold'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              Todo
-            </button>
-            <button
-              onClick={() => onSelectPetType('perro')}
-              className={`px-2 py-0.5 rounded-md text-[11px] transition flex items-center gap-1 ${
-                selectedPetType === 'perro'
-                  ? 'bg-blue-100 text-blue-900 font-bold border border-blue-200'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              🐶 Perros
-            </button>
-            <button
-              onClick={() => onSelectPetType('gato')}
-              className={`px-2 py-0.5 rounded-md text-[11px] transition flex items-center gap-1 ${
-                selectedPetType === 'gato'
-                  ? 'bg-purple-100 text-purple-900 font-bold border border-purple-200'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              🐱 Gatos
-            </button>
-          </div>
-
-          {/* Profit status filters */}
-          <div className="flex items-center gap-1">
-            <span className="text-[10px] font-semibold text-slate-400 mr-1">Margen:</span>
-            <button
-              onClick={() => onSelectProfitFilter('todos')}
-              className={`px-2 py-0.5 rounded-md text-[11px] transition ${
-                selectedProfitFilter === 'todos'
-                  ? 'bg-slate-200/90 text-slate-900 font-bold'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              Todos
-            </button>
-            <button
-              onClick={() => onSelectProfitFilter('rentable')}
-              className={`px-2 py-0.5 rounded-md text-[11px] transition ${
-                selectedProfitFilter === 'rentable'
-                  ? 'bg-emerald-100 text-emerald-900 font-bold border border-emerald-200'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              🟢 &gt;10%
-            </button>
-            <button
-              onClick={() => onSelectProfitFilter('perdida')}
-              className={`px-2 py-0.5 rounded-md text-[11px] transition ${
-                selectedProfitFilter === 'perdida'
-                  ? 'bg-red-100 text-red-900 font-bold border border-red-200'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              🔴 Pérdida
-            </button>
-          </div>
         </div>
       </div>
     </div>
